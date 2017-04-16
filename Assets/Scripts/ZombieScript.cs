@@ -10,6 +10,7 @@ public class ZombieScript : MonoBehaviour {
     Animator animator;
 
 	GameObject player;
+	GameObject generalObject;
 	public float speed = 5.0f;
 	public float health = 100.0f;
 	public float armReach = 1.0f;
@@ -19,6 +20,7 @@ public class ZombieScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player1");
+		generalObject = GameObject.Find ("General Game Object");
 		agent = GetComponent<NavMeshAgent> ();
         agent.destination = player.transform.position;
         animator = GetComponent<Animator>();
@@ -68,6 +70,8 @@ public class ZombieScript : MonoBehaviour {
 
     IEnumerator killZombie() {
         //animator.SetBool("Dead", true);
+		generalObject.GetComponent<GeneralScript>().zombiesLeft--;
+		generalObject.GetComponent<GeneralScript> ().zombiesAlive--;
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(GetComponent<NavMeshAgent>());

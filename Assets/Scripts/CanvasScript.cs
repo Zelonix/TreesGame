@@ -7,6 +7,7 @@ public class CanvasScript : MonoBehaviour {
 
 	GameObject player;
 	public Text healthText;
+	public Text roundText;
 	public Text scoreText;
 	public Text killsText;
 	public Text magAmmoText;

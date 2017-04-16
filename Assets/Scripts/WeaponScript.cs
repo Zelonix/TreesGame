@@ -7,6 +7,8 @@ public class WeaponScript : MonoBehaviour {
 	//Gun variables
 	public Vector3 posRelToPlayer;
 	public Vector3 rotationRelToPlayer;
+	public Vector3 aimPosition;
+	public float aimSpeed = 0.0f;
 
 	public AudioClip fireSound;
 	public AudioClip reloadSound;
@@ -30,11 +32,13 @@ public class WeaponScript : MonoBehaviour {
 
 	private ParticleSystem particleSys;
 	private Camera fpsCam;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		audio = GetComponent<AudioSource> ();
 		fpsCam = GetComponentInParent<Camera> ();
+		animator = GetComponent<Animator> ();
 		barrelEnd = transform.Find ("BarrelEnd").gameObject;
 		particleSys = barrelEnd.GetComponent<ParticleSystem> ();
 		particleSys.Stop ();
@@ -42,10 +46,21 @@ public class WeaponScript : MonoBehaviour {
 
 	float fireTimestamp = 0.0f;
 	private bool reloading = false;
+	public bool aiming = false;
 	private bool semiShot = false;
 
 	// Update is called once per frame
 	void Update () {
+
+		if (Input.GetMouseButton (1) && !reloading) {
+			aiming = true;
+			transform.localPosition = Vector3.Lerp (transform.localPosition, aimPosition, aimSpeed);
+		} 
+		else {
+			aiming = false;
+			transform.localPosition = Vector3.Lerp (transform.localPosition, posRelToPlayer, aimSpeed);
+		}
+			
 
 		if (Input.GetMouseButton(0) && fireTimestamp+1.0f/fireRate < Time.time && magAmmo > 0 && !reloading && !semiShot) {
 
@@ -99,6 +114,9 @@ public class WeaponScript : MonoBehaviour {
 	IEnumerator Reload() {
 		reloading = true;
 		if (gunAmmo > 0) {
+			aiming = false;
+			animator.Play ("Reload", 0);
+			animator.SetBool ("isReloading", true);
 			audio.PlayOneShot (reloadSound, 0.7f);
 			yield return new WaitForSeconds (reloadTime);
 			int bullets = Mathf.Min (maxMagAmmo - magAmmo, gunAmmo);
@@ -106,6 +124,7 @@ public class WeaponScript : MonoBehaviour {
 			gunAmmo -= bullets;
 		}
 		reloading = false;
+		animator.SetBool ("isReloading", false);
 	}
 
 	IEnumerator ShotEffect() {
