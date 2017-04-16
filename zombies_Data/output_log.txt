@@ -1,0 +1,60 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+d3d11: D3D_FEATURE_LEVEL_11_1 not-recognized (only 11.0 runtime installed?)
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon R7 200 Series (ID=0x6658)
+    Vendor:   ATI
+    VRAM:     1000 MB
+    Driver:   21.19.407.0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\ProBuilderCore-Unity5.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\ProBuilderCore-Unity5.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\ProBuilderMeshOps-Unity5.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\ProBuilderMeshOps-Unity5.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\KDTree.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\KDTree.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\pb_Stl.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\pb_Stl.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Triangle.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\Triangle.dll into Unity Child Domain
+- Completed reload, in  0.016 seconds
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Public\Documents\Unity Projects\Trees\TreesGame\zombies_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.784317 ms
+NullReferenceException: Object reference not set to an instance of an object
+  at WeaponScript.OnEnable () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:Internal_CloneSingle(Object)
+UnityEngine.Object:Instantiate(GameObject)
+ShootingScript:Start()
+ 
+(Filename:  Line: -1)
+
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: fa8 -> priority: 1 
+  Thread -> id: 1dd8 -> priority: 1 
+  Thread -> id: 1ca8 -> priority: 1 
+  Thread -> id: 1e8c -> priority: 1 
+NullReferenceException: Object reference not set to an instance of an object
+  at WeaponScript.OnEnable () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:Internal_CloneSingle(Object)
+UnityEngine.Object:Instantiate(GameObject)
+ShootingScript:AddWeapon(GameObject, Int32)
+BuyWeaponScript:Update()
+ 
+(Filename:  Line: -1)
+
