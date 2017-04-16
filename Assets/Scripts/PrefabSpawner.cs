@@ -18,11 +18,11 @@ public class PrefabSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		prefabs.RemoveAll (item => item == null);
-		if (Random.value < spawnChance && prefabs.Count < maxPrefabs && generalObject.GetComponent<GeneralScript>().zombiesLeft > 0 &&
-			generalObject.GetComponent<GeneralScript> ().zombiesAlive < generalObject.GetComponent<GeneralScript> ().maxZombiesAlive) {
+		if (Random.value < spawnChance && prefabs.Count < maxPrefabs && generalObject.GetComponent<GeneralScript>().zombiesLeftToSpawn > 0) {
 
-			generalObject.GetComponent<GeneralScript> ().zombiesAlive++;
+			generalObject.GetComponent<GeneralScript> ().zombiesLeftToSpawn--;
 			GameObject instantiatedPrefab = Instantiate (prefab, transform.position, transform.rotation) as GameObject;
+			instantiatedPrefab.GetComponent<ZombieScript> ().health = generalObject.GetComponent<GeneralScript>().healthToSpawn;
 			prefabs.Add (instantiatedPrefab);
 		}
 	}

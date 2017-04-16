@@ -36,7 +36,7 @@ public class ZombieScript : MonoBehaviour {
             agent.destination = player.transform.position;
             if (distanceToPlayer <= armReach && distanceToPlayer > 0.0f)
             {
-                agent.Stop();
+				agent.isStopped = true;
                 isSwiping = true;
                 if (swipeTimeStamp + swipeTime < Time.time)
                 {
@@ -46,7 +46,7 @@ public class ZombieScript : MonoBehaviour {
             }
             else if (isSwiping)
             {
-                agent.Resume();
+				agent.isStopped = false;
             }
         }/*
 		else {
@@ -63,15 +63,14 @@ public class ZombieScript : MonoBehaviour {
 			player.GetComponent<PlayerScript> ().score += 90;
 			player.GetComponent<PlayerScript> ().kills += 1;
             dead = true;
-            agent.Stop();
+			agent.isStopped = true;
             StartCoroutine(killZombie());
         }
 	}
 
     IEnumerator killZombie() {
         //animator.SetBool("Dead", true);
-		generalObject.GetComponent<GeneralScript>().zombiesLeft--;
-		generalObject.GetComponent<GeneralScript> ().zombiesAlive--;
+		generalObject.GetComponent<GeneralScript>().zombiesLeftToKill--;
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(GetComponent<NavMeshAgent>());
@@ -92,6 +91,23 @@ public class ZombieScript : MonoBehaviour {
         Object.Destroy(this.gameObject);
     }
 
+	IEnumerator BreakBarrier(Collider collider) {
+		while (collider.GetComponent<BarrierScript> ().planksOnBarrier > 0) {
+			agent.isStopped = true;
+			collider.GetComponent<BarrierScript> ().RemovePlank ();
+			if (collider.GetComponent<BarrierScript> ().planksOnBarrier > 0) {
+				yield return new WaitForSeconds (3);
+			}
+		} 
+		agent.isStopped = false;
+		//yield return true;
+	}
+
+	void OnTriggerEnter(Collider collider) {
+		if (collider.name.StartsWith ("Barrier")) {
+			StartCoroutine (BreakBarrier (collider));
+		}
+	}
 	/*bool recursiveChildren(GameObject current) {
 		for (int i = 0; i < current.transform.GetChildCount(); i++) {
 			recursiveChildren(current.transform.GetChild(i).gameObject);

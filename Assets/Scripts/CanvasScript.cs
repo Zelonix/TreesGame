@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CanvasScript : MonoBehaviour {
 
 	GameObject player;
+	public Image crossHair;
 	public Text healthText;
 	public Text roundText;
 	public Text scoreText;

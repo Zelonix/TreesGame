@@ -33,12 +33,14 @@ public class WeaponScript : MonoBehaviour {
 	private ParticleSystem particleSys;
 	private Camera fpsCam;
 	private Animator animator;
+	private GameObject canvas;
 
 	// Use this for initialization
 	void Start () {
 		audio = GetComponent<AudioSource> ();
 		fpsCam = GetComponentInParent<Camera> ();
 		animator = GetComponent<Animator> ();
+		canvas = GameObject.Find ("Canvas");
 		barrelEnd = transform.Find ("BarrelEnd").gameObject;
 		particleSys = barrelEnd.GetComponent<ParticleSystem> ();
 		particleSys.Stop ();
@@ -54,10 +56,12 @@ public class WeaponScript : MonoBehaviour {
 
 		if (Input.GetMouseButton (1) && !reloading) {
 			aiming = true;
+			canvas.GetComponent<CanvasScript> ().crossHair.enabled = false;
 			transform.localPosition = Vector3.Lerp (transform.localPosition, aimPosition, aimSpeed);
 		} 
 		else {
 			aiming = false;
+			canvas.GetComponent<CanvasScript> ().crossHair.enabled = true;
 			transform.localPosition = Vector3.Lerp (transform.localPosition, posRelToPlayer, aimSpeed);
 		}
 			
@@ -138,6 +142,8 @@ public class WeaponScript : MonoBehaviour {
 		if (magAmmo == 0) {
 			StartCoroutine ("Reload");
 		}
+		barrelEnd = transform.Find ("BarrelEnd").gameObject;
+		particleSys = barrelEnd.GetComponent<ParticleSystem>();
         particleSys.Stop();
     }
 }

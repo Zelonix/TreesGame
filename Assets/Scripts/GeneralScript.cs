@@ -11,10 +11,10 @@ public class GeneralScript : MonoBehaviour {
 	AudioSource audioSource;
 
 	public int currentRound = 1;
-	public int zombiesLeft = 0;
-	public int zombiesAlive = 0;
-	public int maxZombiesAlive = 0;
+	public int zombiesLeftToSpawn = 0;
+	public int zombiesLeftToKill = 0;
 	public int[] zombiesPerRound = new int[100];
+	public int healthToSpawn = 150;
 
 	// Use this for initialization
 	void Start () {
@@ -24,13 +24,14 @@ public class GeneralScript : MonoBehaviour {
 		audioSource.clip = startRoundAudio;
 		audioSource.Play ();
 		//mainCanvas = GameObject.Find ("Canvas");
-		zombiesLeft = zombiesPerRound [currentRound - 1];
+		zombiesLeftToSpawn = zombiesPerRound [currentRound - 1];
+		zombiesLeftToKill = zombiesLeftToSpawn;
 	}
 	
 	// Update is called once per frame
 	bool passingRound = false;
 	void Update () {
-		if (zombiesLeft == 0 && !passingRound) {
+		if (zombiesLeftToKill == 0 && !passingRound) {
 			StartCoroutine (NextRound ());
 		}
 		if (Input.GetKey ("escape")) {
@@ -47,7 +48,12 @@ public class GeneralScript : MonoBehaviour {
 		audioSource.Play ();
 		currentRound++;
 		mainCanvas.GetComponent<CanvasScript> ().roundText.text = "Round: " + currentRound.ToString();
-		zombiesLeft = zombiesPerRound [currentRound - 1];
+		zombiesLeftToSpawn = zombiesPerRound [currentRound - 1];
+		zombiesLeftToKill = zombiesLeftToSpawn;
+		if (currentRound < 10)
+			healthToSpawn += 100;
+		else
+			healthToSpawn = (int)(healthToSpawn * 1.1);
 		passingRound = false;
 	}
 }
